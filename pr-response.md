@@ -66,10 +66,11 @@ a0d7f62 feat: add watchlist feature with model, service, and endpoints
 
 It's backed by a new `WatchlistEntry` model (UUID primary key, UUID `film_id` foreign key to `Film`, `public` flag) with a `Film` relationship, plus a `watchlist_service` exposing `add_to_watchlist()` and `get_watchlist()`.
 
-**Design decisions** (full reasoning in Comments 4 and 5 above):
-- **Private by default** (`public=False`) — a watchlist signals future intent, so sharing is opt-in.
-- **Newest-first ordering** — matches `get_collection` for app-wide consistency and surfaces the most recently added films.
-- **Duplicates rejected** — a repeat add raises `AlreadyInWatchlistError` instead of silently creating a second row, mirroring `add_to_collection`.
+**Design decisions.** Two deliberate decisions were made (full reasoning in Comments 4 and 5 above):
+1. **Visibility default → private** (`public=False`). New watchlists are private; sharing is opt-in, because a watchlist signals future intent, which is more sensitive than an already-watched log.
+2. **Sort order → date added, newest first** (`WatchlistEntry.date_added.desc()`). Matches `get_collection` for app-wide consistency and surfaces the most recently added films — the browsing task users actually bring to a watchlist.
+
+(Also: duplicate adds are rejected with `AlreadyInWatchlistError` rather than silently creating a second row, mirroring `add_to_collection`.)
 
 **How to manually test.**
 1. `pip install -r requirements.txt`, then `python app.py` (starts on `http://127.0.0.1:5000`; there's no frontend, so the root URL 404s — that's expected).
