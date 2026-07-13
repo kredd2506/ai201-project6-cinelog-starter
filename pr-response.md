@@ -1,7 +1,7 @@
 # PR Response Doc — CineLog Watchlist Feature
 
 ## AI Usage
-<!-- Review and edit this to accurately reflect your own use before submitting. -->
+
 - **Orientation:** Used AI to summarize `models.py`, `collection_service.py`, and `test_collection.py` and to explain the branch topology (feature/watchlist vs. the UUID refactor on main) before reading the review comments.
 - **Comment 2 (deduplication):** Asked AI to explain *what* the `add_to_collection` dedup check does and what it returns on a duplicate, rather than to write the code; the check in `add_to_watchlist()` follows that pattern.
 - **Comments 4 & 5 (design decisions):** Drafted my positions, then used AI as a devil's advocate to surface counterarguments and un-acknowledged tradeoffs (see stress-test notes below). Revised where the counterargument was real; the reasoning below is in my own voice.
