@@ -10,12 +10,15 @@
   - _Comment 5 (sort order):_ The pass raised: (1) **recency ≠ priority** — a film added months ago that the user keeps meaning to watch may matter more than an impulse add, so newest-first can bury long-standing intent; (2) **no tiebreaker** — `date_added.desc()` is nondeterministic when timestamps tie (e.g. a bulk insert); and (3) that the "consistency with `get_collection`" argument is weaker than stated, since a to-watch list and an already-watched list are semantically different. What I changed: I added the explicit case *for* alphabetical and proposed a future user-selectable sort (`?sort=`) as the real answer to the lookup/priority case, so the decision engages the tradeoff rather than just asserting a preference. I noted the missing tiebreaker as a genuine follow-up (not implemented in this PR). I held date-added-newest-first as the default.
 
 ## Commit History
-Clean, linear history — eight single-purpose commits with Conventional Commits messages (`feat`/`fix`/`refactor`/`test`/`docs`) and no merge commits:
+Clean, linear history — every commit is a single logical change with a Conventional Commits message (`feat`/`fix`/`refactor`/`test`/`docs`), and there are no merge commits. The feature and its six review responses are the bottom eight commits; the trailing `docs:` commits refine this response document itself.
 
 ![git log --oneline of the feature/watchlist branch](commit-history.png)
 
 ```text
 $ git log --oneline
+7312a60 docs: complete AI usage stress-test notes for design decisions
+2962de4 docs: label visibility and sort-order decisions explicitly in PR description
+411f5c8 docs: add commit-history screenshot to PR response doc
 9e9c565 docs: add PR response doc with review responses and design decisions
 3eb0e78 test: add watchlist service tests
 5b6e1c8 fix: default new watchlist entries to private
