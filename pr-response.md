@@ -9,6 +9,23 @@
   - _Comment 4:_ <!-- what the AI pushed back with, and what you changed (or why you held your position) -->
   - _Comment 5:_ <!-- same -->
 
+## Commit History
+Clean, linear history — eight single-purpose commits with Conventional Commits messages (`feat`/`fix`/`refactor`/`test`/`docs`) and no merge commits:
+
+![git log --oneline of the feature/watchlist branch](commit-history.png)
+
+```text
+$ git log --oneline
+9e9c565 docs: add PR response doc with review responses and design decisions
+3eb0e78 test: add watchlist service tests
+5b6e1c8 fix: default new watchlist entries to private
+2a4ed51 fix: order watchlist by date added, newest first
+b501024 fix: prevent duplicate films on a user's watchlist
+c57b0db fix: rename save_to_watchlist to add_to_watchlist per naming convention
+642c3ac refactor: use db.session.get for film lookup in collection service
+a0d7f62 feat: add watchlist feature with model, service, and endpoints
+```
+
 ## Comment 1 — Rename
 **What I did:** Renamed `save_to_watchlist()` to `add_to_watchlist()` in `services/watchlist_service.py` to match the project's `verb_to_noun` naming convention (`add_to_collection`, `remove_from_collection`). Committed on its own as a `fix:` commit.
 **Where I looked for call sites:** Ran a project-wide search `grep -rn "save_to_watchlist" . --include="*.py"` rather than trusting memory. It surfaced exactly one usage outside the definition — in `routes/watchlist/watchlist.py`, appearing twice: the `from services.watchlist_service import ...` line and the call inside `add_film()`. Updated both.
